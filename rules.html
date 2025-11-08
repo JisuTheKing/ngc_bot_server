@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Rules - NGC Bot</title>
+    <link rel="icon" href="https://cdn.discordapp.com/icons/1369933976713695302/a_e0efcd290dbf33f080860e3142bb36c2.gif" type="image/gif">
+    <style>
+        /* ---------- Base Styles ---------- */
+        body {
+            background: linear-gradient(135deg, #9fc1ff, #ff9cbf);
+            font-family: 'Poppins', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        header img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.8em;
+            font-weight: 600;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        /* ---------- Content Box ---------- */
+        .content {
+            background: rgba(0, 0, 0, 0.55);
+            padding: 40px 60px;
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+            max-width: 900px;
+            margin: 20px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .content h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        /* Markdown-inspired Styles */
+        .markdown-content {
+            text-align: left;
+            margin: 0 auto;
+            max-width: 800px;
+            line-height: 1.6;
+        }
+
+        .markdown-content p {
+            font-size: 1.1em;
+            color: #f0f0f0;
+            margin-bottom: 15px;
+        }
+
+        .markdown-content strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .markdown-content em {
+            color: #ff9cbf;
+            font-style: italic;
+        }
+
+        .markdown-content ul, .markdown-content ol {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        .markdown-content li {
+            margin-bottom: 8px;
+            color: #f0f0f0;
+            font-size: 1.1em;
+        }
+
+        .markdown-content a {
+            color: #9fc1ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .markdown-content a:hover {
+            color: #ffffff;
+            border-bottom: 1px solid #9fc1ff;
+        }
+
+        .markdown-content code {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.9em;
+            color: #ff9cbf;
+        }
+
+        .gradient-admin {
+            background: linear-gradient(135deg, #00ffff, #fdffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+        }
+
+        .markdown-content blockquote {
+            border-left: 4px solid #9fc1ff;
+            padding-left: 15px;
+            margin: 20px 0;
+            color: #cccccc;
+            font-style: italic;
+        }
+
+        /* Rule List Styling */
+        .rules-list {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 25px;
+        }
+
+        .rule-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .rule-number {
+            background: linear-gradient(135deg, #9fc1ff, #ff9cbf);
+            color: #1c1c1c;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9em;
+            margin-right: 15px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .rule-text {
+            flex: 1;
+            color: #f0f0f0;
+            font-size: 1.1em;
+            line-height: 1.5;
+        }
+
+        /* Emoji Styling */
+        .emoji {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            margin: 0 3px;
+        }
+
+        .inline-emoji {
+            width: 18px;
+            height: 18px;
+            vertical-align: text-bottom;
+            margin: 0 2px;
+        }
+
+        /* Section Styling */
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border-left: 4px solid #9fc1ff;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            color: #ffffff;
+        }
+
+        .section-title .emoji {
+            margin-right: 10px;
+        }
+
+        .warning-section {
+            border-left-color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.1);
+        }
+
+        .info-section {
+            border-left-color: #4ecdc4;
+            background: rgba(78, 205, 196, 0.1);
+        }
+
+        /* Nested List Styling */
+        .nested-list {
+            list-style: none;
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+
+        .nested-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 5px;
+            color: #cccccc;
+        }
+
+        .nested-bullet {
+            color: #9fc1ff;
+            margin-right: 8px;
+            font-weight: bold;
+        }
+
+        /* Divider */
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #9fc1ff, #ff9cbf, transparent);
+            margin: 30px 0;
+            border: none;
+        }
+
+        /* ---------- Buttons ---------- */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .button-container a {
+            display: inline-block;
+            padding: 12px 30px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border: 2px solid #fff;
+            border-radius: 30px;
+            font-size: 1.2em;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .button-container a:hover {
+            background-color: #ffffff;
+            color: #1c1c1c;
+            box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.6);
+            transform: translateY(-3px);
+        }
+
+        /* ---------- Footer ---------- */
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #fff;
+            font-size: 0.95em;
+            text-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Scrollbar Styling */
+        .content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .content::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .content::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #9fc1ff, #ff9cbf);
+            border-radius: 10px;
+        }
+
+        .content::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #7da9ff, #ff7ba8);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="https://cdn.discordapp.com/icons/1369933976713695302/a_e0efcd290dbf33f080860e3142bb36c2.gif" alt="NGC Logo">
+        <h1>Server Rules</h1>
+    </header>
+
+    <div class="content">
+        <h2>Nexus Gaming & Café Server Rules</h2>
+        
+        <div class="markdown-content">
+            <!-- Introduction -->
+            <div class="section">
+                <p>This community is built for gamers and chill seekers alike.<br>
+                Before you dive in, please take a moment to read through our server rules and guidelines. <img src="https://cdn.discordapp.com/emojis/1425733632122687530.gif" class="inline-emoji" alt="heart"></p>
+
+                <p>All members are required to follow the rules listed below while participating in this Discord server. <img src="https://cdn.discordapp.com/emojis/1435933192778682470.png" class="inline-emoji" alt="rules"><br>
+                Nexus Gaming & Café operates in full compliance with the <strong>Discord Community Guidelines</strong> and <strong>Terms of Service</strong>. <img src="https://cdn.discordapp.com/emojis/1435933192778682470.png" class="inline-emoji" alt="discord"></p>
+
+                <p>For more details, please visit:<br>
+                • <a href="https://discord.com/guidelines" target="_blank">Discord Community Guidelines</a><br>
+                • <a href="https://discord.com/terms" target="_blank">Discord Terms of Service</a></p>
+
+                <p>Any situations not explicitly covered by these rules will be handled on a <strong>case-by-case basis</strong>.<br>
+                Moderators reserve the right to take appropriate action when necessary, even if a specific rule does not address the issue. <img src="https://cdn.discordapp.com/emojis/1435933189683281970.png" class="inline-emoji" alt="StaffIcon"></p>
+            </div>
+
+            <!-- Support Section -->
+            <div class="section info-section">
+                <div class="section-title">
+                    <img src="https://cdn.discordapp.com/emojis/1436078723970633849.png" class="emoji" alt="info">
+                    <span>Need Help?</span>
+                </div>
+                <p>If you have any questions or need to report something:<br>
+                • Create a ticket in <a href="https://discord.com/channels/1369933976713695302/1393741929174269972" target="_blank"><code>#request-assistance</code></a><br>
+                • DM <a href="https://discord.com/users/667289369295454228" target="_blank" class="gradient-admin">@Admin</a> or anyone with the <code>@Moderator</code> / <code>@Admin</code> role</p>
+            </div>
+
+            <!-- Warning Information -->
+            <div class="section">
+                <p>• Official warnings will only be issued by <a href="https://discord.com/users/1417871516456059031" target="_blank"><code>@NGC Bot</code></a>.<br>
+                • You may also receive automated messages from moderation bots about your conduct - these are <strong>informational only</strong> and do <strong>not</strong> count as official warnings.<br>
+                • Please <strong>do not block</strong> these bots or disable their DMs, as they provide important updates regarding server moderation.<br>
+                • In most cases, users will receive at least one <strong>mute</strong> before a <strong>ban</strong> is considered, unless the situation is severe.</p>
+            </div>
+
+            <hr class="divider">
+
+            <!-- Rules List -->
+            <ul class="rules-list">
+                <li class="rule-item">
+                    <div class="rule-number">1</div>
+                    <div class="rule-text"><strong>Raiding is not allowed</strong> in this server - this includes participating in, organizing, or encouraging raids on <strong>this server</strong> or any <strong>other community</strong>.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">2</div>
+                    <div class="rule-text">Any user found to be involved in a raid will face an <strong>immediate permanent ban</strong>.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">3</div>
+                    <div class="rule-text">Sharing raid-related content, screenshots, or messages that support such activities is also not tolerated.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">4</div>
+                    <div class="rule-text">Do <strong>not</strong> flood channels with text, links, GIFs, song lyrics, images, excessive CAPS, copypastas, or meaningless spam.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">5</div>
+                    <div class="rule-text">Avoid repetitive tagging or mentioning of users or roles.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">6</div>
+                    <div class="rule-text">Repeatedly sending messages with little to no purpose is considered spam.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">7</div>
+                    <div class="rule-text"><strong>Voice spam</strong> (e.g., soundboards, mic spamming, or loud background noise) is also prohibited in voice channels.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">8</div>
+                    <div class="rule-text">Automated moderation bots may issue <strong>instant warnings</strong> for spam-like behavior.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">9</div>
+                    <div class="rule-text">Do not derail conversations or post off-topic content.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">10</div>
+                    <div class="rule-text">Media or memes in <a href="https://discord.com/channels/1369933976713695302/1369963263474798662" target="_blank">General Chat</a> are <strong>only allowed when contextually relevant</strong> and used <strong>sparingly</strong>.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">11</div>
+                    <div class="rule-text">Bot commands should be used <strong>only</strong> in <a href="https://discord.com/channels/1369933976713695302/1421722819980693594" target="_blank">Bot Commands</a>.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">12</div>
+                    <div class="rule-text">Before posting, check the <strong>channel topic</strong>, <strong>description</strong>, or <strong>pinned messages</strong> for guidance.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">13</div>
+                    <div class="rule-text">Avoid unnecessary back-and-forth arguments in public channels; move disputes to DMs or contact a moderator.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">14</div>
+                    <div class="rule-text">Offensive, discriminatory, or explicit names are <strong>not allowed</strong>.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">15</div>
+                    <div class="rule-text">Do not impersonate other members, public figures, or staff.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">16</div>
+                    <div class="rule-text">Avoid using fake role titles or tags (e.g., "Admin", "Mod", "Bot") in your nickname.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">17</div>
+                    <div class="rule-text">Staff reserve the right to <strong>change inappropriate nicknames</strong> without notice.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">18</div>
+                    <div class="rule-text">Alt accounts, when discovered, will be <strong>banned along with the main account</strong>.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">19</div>
+                    <div class="rule-text">If you have a legitimate reason for using a second account (e.g., technical issue or testing), contact an <strong>admin for approval</strong> beforehand.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">20</div>
+                    <div class="rule-text">Evading punishments using another account will result in <strong>permanent ban</strong> from the server.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">21</div>
+                    <div class="rule-text">Selling, trading, advertising, or promoting other communities, products, or services without permission is <strong>forbidden</strong>.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">22</div>
+                    <div class="rule-text">Posting self-promo content (e.g., social media, YouTube links, Twitch streams) outside of approved areas will be removed.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">23</div>
+                    <div class="rule-text">Begging for attention, roles, or donations is not tolerated.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">24</div>
+                    <div class="rule-text">If you wish to collaborate or promote something relevant to the community, please <strong>contact an admin first</strong>.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">25</div>
+                    <div class="rule-text">Do not post links to other Discord servers in public channels unless authorized by staff.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">26</div>
+                    <div class="rule-text">Posting or sharing <strong>piracy</strong>, <strong>hacks</strong>, <strong>cracks</strong>, or <strong>illegal materials</strong> is strictly prohibited.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">27</div>
+                    <div class="rule-text">Sharing <strong>malware</strong>, scam links, shortened URLs, or IP grabbers will lead to a <strong>permanent ban</strong>.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">28</div>
+                    <div class="rule-text">Refrain from sharing NSFW or shock content; this includes gore, sexual material, or disturbing imagery.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">29</div>
+                    <div class="rule-text">Always verify links before posting to avoid spreading malicious content.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">30</div>
+                    <div class="rule-text">You may <strong>swear casually</strong>, but <strong>racist, homophobic, sexist, or discriminatory</strong> remarks are <strong>not tolerated</strong>.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">31</div>
+                    <div class="rule-text">
+                        <strong>Absolutely prohibited:</strong>
+                        <ul class="nested-list">
+                            <li class="nested-item">
+                                <span class="nested-bullet">•</span>
+                                The full <em>N-word</em> (Black slur)
+                            </li>
+                            <li class="nested-item">
+                                <span class="nested-bullet">•</span>
+                                The <em>F-word</em> (gay slur)
+                            </li>
+                            <li class="nested-item">
+                                <span class="nested-bullet">•</span>
+                                Any shortened, censored, or "alternative" spellings meant to bypass filters
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">32</div>
+                    <div class="rule-text"><strong>Hate speech</strong>, slurs, or remarks targeting race, gender, religion, sexuality, or nationality will lead to <strong>instant disciplinary action</strong>.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">33</div>
+                    <div class="rule-text">Avoid heated arguments, personal insults, or name-calling - <strong>disagree respectfully</strong>.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">34</div>
+                    <div class="rule-text"><strong>No</strong> suicidal jokes, political provocations, or excessive toxicity. These topics escalate quickly and harm community wellbeing.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">35</div>
+                    <div class="rule-text">Light banter is fine, but <strong>do not cross personal boundaries</strong> or intentionally provoke others.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">36</div>
+                    <div class="rule-text">Sharing another person's <strong>real name, photo, address, phone number, or any identifying information</strong> without their explicit consent is considered <strong>doxxing</strong> and is <strong>strictly forbidden</strong>.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">37</div>
+                    <div class="rule-text">This includes sharing <strong>screenshots, DMs, or private server conversations</strong> without permission.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">38</div>
+                    <div class="rule-text">Do <strong>not</strong> spread rumors or false information about anyone, whether they are in this server or not.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">39</div>
+                    <div class="rule-text">Any confirmed attempt at doxxing or harassment will result in an <strong>immediate permanent ban</strong> and possible <strong>Discord Trust & Safety</strong> report.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">40</div>
+                    <div class="rule-text">Posting, linking, or promoting <strong>NSFW content</strong> (pornography, sexualized art, gore, violence, or extreme material) is <strong>strictly prohibited</strong>.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">41</div>
+                    <div class="rule-text"><strong>No</strong> explicit or suggestive profile pictures, banners, usernames, or statuses.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">42</div>
+                    <div class="rule-text"><strong>Do not sexualize minors</strong>, make pedophilic remarks, or joke about such topics - this will result in an <strong>instant permanent ban</strong>.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">43</div>
+                    <div class="rule-text">Erotic roleplay, suggestive discussions, or sexual content of any kind is <strong>not allowed</strong> anywhere on the server.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">44</div>
+                    <div class="rule-text">Even in private threads or voice chats, if such content surfaces, <strong>moderation action will still apply</strong>.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">45</div>
+                    <div class="rule-text">Always be <strong>polite and considerate</strong> in all interactions; respect is a priority here.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">46</div>
+                    <div class="rule-text">Understand the difference between <strong>humor</strong> and <strong>hurtful comments</strong>. Jokes that target individuals or groups will not be tolerated.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">47</div>
+                    <div class="rule-text"><strong>No bullying, harassment, hate speech, or personal attacks</strong> of any kind, including those based on race, religion, nationality, gender identity, or sexuality.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">48</div>
+                    <div class="rule-text">Do not engage in heated arguments or provoke others. If someone offends or annoys you, <strong>do not retaliate</strong>; simply disengage and, if necessary, <strong>report the issue here <a href="https://discord.com/channels/1369933976713695302/1393741929174269972" target="_blank">#request-assistance</a></strong>.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">49</div>
+                    <div class="rule-text">Threats, intimidation, or cyberbullying (including DMs) are <strong>strictly forbidden</strong>.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">50</div>
+                    <div class="rule-text">Avoid using language, images, or media that promote <strong>homophobia, racism, sexism, religious intolerance, or harassment</strong>.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">51</div>
+                    <div class="rule-text">Everyone deserves to feel <strong>safe and welcome</strong> here; maintain that standard.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">52</div>
+                    <div class="rule-text">Do not post <strong>flashing or seizure-inducing</strong> images, GIFs, or emotes.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">53</div>
+                    <div class="rule-text">Avoid profile pictures or banners that may cause discomfort, fear, or distress.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">54</div>
+                    <div class="rule-text">Do not <strong>promote, glorify, or make light of</strong> suicide, self-harm, or violence.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">55</div>
+                    <div class="rule-text">Encouraging or joking about such acts will result in <strong>immediate action</strong> by moderators.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">56</div>
+                    <div class="rule-text">If you or someone else appears to be struggling, please <strong>reach out to a trusted friend, moderator, or a mental health resource</strong> instead of posting triggering content.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">57</div>
+                    <div class="rule-text">This is a community to <strong>uplift one another</strong>, not to spread negativity or harm.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">58</div>
+                    <div class="rule-text">Actions will be taken based on <strong>server activity</strong>. Incidents that occur outside of the server are generally <strong>beyond our control</strong> and may not result in any action.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">59</div>
+                    <div class="rule-text">Avoid posting content or opinions that may cause <strong>drama or controversy</strong> within the server. Keep sensitive topics out of <a href="https://discord.com/channels/1369933976713695302/1369963263474798662" target="_blank">General Chat</a>.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">60</div>
+                    <div class="rule-text">This is <strong>not a matchmaking server</strong>. The staff are not responsible for personal relationships or interactions between members. Do not hold the server accountable if personal relationships fail.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">61</div>
+                    <div class="rule-text">Do <strong>not use the server to vent</strong> about bans, conflicts, or issues from other communities. Similarly, <strong>do not disparage former members</strong> or other servers. Respectful discussion only.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">62</div>
+                    <div class="rule-text">Do <strong>not ear-rape</strong>, spam, or use soundboards/voice changers without consent.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">63</div>
+                    <div class="rule-text">Avoid <strong>channel hopping repeatedly</strong> to disturb others.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">64</div>
+                    <div class="rule-text">Minimize <strong>background noise</strong> where possible. Use <a href="https://support.discord.com/hc/en-us/articles/211376518-Voice-Input-Modes-101-Push-to-Talk-Voice-Activated#h_01JQ6YG64XEPX9GVE96X18RK0M" target="_blank"><strong>push-to-talk</strong></a> to reduce disruptions.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">65</div>
+                    <div class="rule-text">Refrain from starting <strong>religious, political, or social debates</strong> in voice channels.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">66</div>
+                    <div class="rule-text">Do <strong>not bully, harass, or spam</strong> in voice chats.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">67</div>
+                    <div class="rule-text">If you intend to <strong>record a conversation</strong>, you must <strong>notify all participants</strong> and receive consent <strong>before recording</strong>.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">68</div>
+                    <div class="rule-text">Allow other members a chance to <strong>queue and play their music</strong>.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">69</div>
+                    <div class="rule-text">Be <strong>respectful</strong> of other's listening preferences; do not monopolize the queue with your songs.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">70</div>
+                    <div class="rule-text">Avoid queuing excessive songs just to ensure your tracks play first.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">71</div>
+                    <div class="rule-text">If you dislike the current music, <strong>lower the bot's volume</strong> or wait for your song to play. You may also join another voice channel to play music via another bot.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">72</div>
+                    <div class="rule-text">When a staff member asks you to stop a behavior, <strong>change the topic</strong>, or follow any instructions, you <strong>must comply</strong>.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">73</div>
+                    <div class="rule-text">Do <strong>not ping staff roles unnecessarily</strong>; only do so for matters requiring <strong>immediate attention</strong>.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">74</div>
+                    <div class="rule-text"><strong>Impersonating, taunting, or harassing staff members</strong> in any form is strictly prohibited and punishable.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">75</div>
+                    <div class="rule-text">Avoid deliberately provoking or "messing with" staff members.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">76</div>
+                    <div class="rule-text"><strong>Do not mini-mod</strong>; leave moderation to the official team. Attempting to enforce rules on others can result in disciplinary action.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">77</div>
+                    <div class="rule-text">Moderators have the authority to <strong>kick or ban users</strong> (including alternate accounts) without prior warning if a member violates server rules.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">78</div>
+                    <div class="rule-text">Once an account is banned, <strong>you are not allowed back</strong> until you submit a formal <strong>unban appeal</strong>. Appeals must be submitted <a href="https://discord.gg/48wFbKjHPh" target="_blank">here</a>.</div>
+                </li>
+                <li class="rule-item">
+                    <div class="rule-number">79</div>
+                    <div class="rule-text">Appeals will be <strong>reviewed by the admins and server owners</strong>, and only approved appeals allow a banned user to rejoin. Be honest and respectful when submitting an appeal.</div>
+                </li>
+            </ul>
+
+            <hr class="divider">
+
+            <!-- Final Sections -->
+            <div class="section info-section">
+                <div class="section-title">
+                    <img src="https://cdn.discordapp.com/emojis/1436078723970633849.png" class="emoji" alt="info">
+                    <span>Reporting & Complaints</span>
+                </div>
+                <p>If you witness behavior that violates the rules or poses a serious threat, <strong>report it immediately</strong> using <a href="https://discord.com/channels/1369933976713695302/1393741929174269972" target="_blank"><code>#request-assistance</code></a> or DM a mod/admin, preferably with <strong>evidence</strong>.</p>
+                <p>If you have complaints about mods, reach out to <a href="https://discord.com/users/667289369295454228" target="_blank" class="gradient-admin">@Admin</a> or anyone in the <code>@Moderator</code> / <code>@Admin</code> role.</p>
+            </div>
+
+            <div class="section warning-section">
+                <div class="section-title">
+                    <img src="https://cdn.discordapp.com/emojis/1436078740450050080.png" class="emoji" alt="warning">
+                    <span>Important Notes</span>
+                </div>
+                <p><strong>Staff members are not exempt</strong> from server rules and regulations; they are held to the same standards as all users.</p>
+                <p>All reports and moderation actions will be handled <strong>at the discretion of the staff</strong>, in alignment with the server's <a href="https://discord.com/channels/1369933976713695302/1369963247578382396" target="_blank">rules</a> and <a href="https://discord.com/guidelines" target="_blank">Discord's Community Guidelines</a>.</p>
+                <p>Nexus Gaming & Café Discord server is a general-audience community. All content must remain appropriate for users aged 13 and older, in compliance with <a href="https://discord.com/terms" target="_blank">Discord's Terms of Service</a> and <a href="https://discord.com/guidelines" target="_blank">Community Guidelines</a>.</p>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <a href="index.html">Back to Home</a>
+            <a href="tos.html">Terms of Service</a>
+            <a href="privacy.html">Privacy Policy</a>
+        </div>
+    </div>
+
+    <footer>
+        © 2025 Nexus Gaming & Café | N G C BOT
+    </footer>
+
+</body>
+</html>
