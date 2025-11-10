@@ -16,32 +16,138 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
             text-align: center;
         }
 
-        header {
+        /* ---------- Responsive Navigation Bar ---------- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 10px 0;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .nav-logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 20px;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            display: block;
+            font-weight: 500;
+            border: 1px solid transparent;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* ---------- Header with Fixed Logo Alignment ---------- */
+        .header-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 20px;
+            justify-content: center;
+            width: 100%;
+            padding: 20px 0;
+            margin: 80px 0 20px 0;
         }
 
-        header img {
+        .logo-title-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .server-logo {
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            margin-bottom: 15px;
+            object-fit: cover;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+            display: block;
+            margin: 0 auto;
         }
 
-        header h1 {
+        .server-title {
             margin: 0;
             font-size: 2.8em;
             font-weight: 600;
             color: #fff;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .server-subtitle {
+            margin: 5px 0 0 0;
+            font-size: 1.2em;
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            font-weight: 300;
         }
 
         /* ---------- Content Box ---------- */
@@ -51,8 +157,7 @@
             border-radius: 15px;
             box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
             max-width: 900px;
-            margin: 20px;
-            max-height: 600px;
+            margin: 0 20px 40px;
             overflow-y: auto;
         }
 
@@ -173,21 +278,6 @@
             line-height: 1.5;
         }
 
-        /* Emoji Styling */
-        .emoji {
-            width: 20px;
-            height: 20px;
-            vertical-align: middle;
-            margin: 0 3px;
-        }
-
-        .inline-emoji {
-            width: 18px;
-            height: 18px;
-            vertical-align: text-bottom;
-            margin: 0 2px;
-        }
-
         /* Section Styling */
         .section {
             margin-bottom: 30px;
@@ -217,6 +307,21 @@
         .info-section {
             border-left-color: #4ecdc4;
             background: rgba(78, 205, 196, 0.1);
+        }
+
+        /* Emoji Styling */
+        .emoji {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            margin: 0 3px;
+        }
+
+        .inline-emoji {
+            width: 18px;
+            height: 18px;
+            vertical-align: text-bottom;
+            margin: 0 2px;
         }
 
         /* Nested List Styling */
@@ -284,6 +389,8 @@
             color: #fff;
             font-size: 0.95em;
             text-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            width: 100%;
         }
 
         /* Scrollbar Styling */
@@ -304,14 +411,165 @@
         .content::-webkit-scrollbar-thumb:hover {
             background: linear-gradient(135deg, #7da9ff, #ff7ba8);
         }
+
+        /* ---------- Responsive Design ---------- */
+        @media screen and (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: rgba(0, 0, 0, 0.95);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.5);
+                padding: 20px 0;
+                gap: 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-item {
+                margin: 10px 0;
+            }
+
+            .nav-link {
+                padding: 15px;
+                border-radius: 0;
+                border: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+
+            .server-title {
+                font-size: 2.2em;
+            }
+            
+            .server-subtitle {
+                font-size: 1em;
+            }
+            
+            .content {
+                padding: 30px 20px;
+                margin: 0 15px 30px;
+            }
+            
+            .content h2 {
+                font-size: 1.6em;
+            }
+            
+            .rule-item {
+                flex-direction: column;
+            }
+            
+            .rule-number {
+                margin-bottom: 8px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .nav-container {
+                padding: 0 15px;
+            }
+
+            .nav-logo {
+                font-size: 1em;
+            }
+
+            .nav-logo img {
+                width: 35px;
+                height: 35px;
+            }
+
+            .server-title {
+                font-size: 1.8em;
+            }
+            
+            .server-logo {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .content h2 {
+                font-size: 1.4em;
+            }
+            
+            .markdown-content p {
+                font-size: 1em;
+            }
+            
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .button-container a {
+                width: 80%;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <img src="https://cdn.discordapp.com/icons/1369933976713695302/a_e0efcd290dbf33f080860e3142bb36c2.gif" alt="NGC Logo">
-        <h1>Server Rules</h1>
-    </header>
+    <!-- Responsive Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="https://cdn.discordapp.com/icons/1369933976713695302/a_e0efcd290dbf33f080860e3142bb36c2.gif" alt="NGC Logo">
+                <span>Nexus Gaming & Café</span>
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="rules.html" class="nav-link">Server Rules</a>
+                </li>
+                <li class="nav-item">
+                    <a href="tos.html" class="nav-link">Terms of Service</a>
+                </li>
+                <li class="nav-item">
+                    <a href="privacy.html" class="nav-link">Privacy Policy</a>
+                </li>
+            </ul>
+            
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header with Properly Aligned Logo -->
+    <div class="header-container">
+        <div class="logo-title-wrapper">
+            <img src="https://cdn.discordapp.com/icons/1369933976713695302/a_e0efcd290dbf33f080860e3142bb36c2.gif" alt="NGC Logo" class="server-logo">
+            <div>
+                <h1 class="server-title">Nexus Gaming & Café</h1>
+                <p class="server-subtitle">Server Rules</p>
+            </div>
+        </div>
+    </div>
 
     <div class="content">
         <h2>Nexus Gaming & Café Server Rules</h2>
@@ -723,6 +981,23 @@
     <footer>
         © 2025 Nexus Gaming & Café | N G C BOT
     </footer>
+
+    <script>
+        // Mobile menu toggle functionality
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        }));
+    </script>
 
 </body>
 </html>
