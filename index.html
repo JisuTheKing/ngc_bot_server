@@ -3,6 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- CSP Header to fix WidgetBot -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self' https://*.widgetbot.io https://*.discord.com https://*.discordapp.com;
+        script-src 'self' 'unsafe-eval' https://cdn.jsdelivr.net https://storage.ko-fi.com;
+        style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+        connect-src 'self' https://*.widgetbot.io https://*.discord.com https://*.discordapp.com;
+        frame-src 'self' https://*.widgetbot.io https://*.discord.com;
+        img-src 'self' data: https: blob:;
+    ">
+    
+    <!-- Discord Embed Meta Tags -->
+    <meta property="og:title" content="Nexus Gaming & Café">
+    <meta property="og:description" content="✨ Nexus Gaming & Café 🎮☕ your vibe sanctuary where games meet chill moments 🌙 connect with cool souls 🌿 share cute emojis 🖼 glow up your pfp 🤳 join lowkey events 🎉 and find your online fam 💫 good vibes only always 🕊">
+    <meta property="og:url" content="https://jisutheking.github.io/ngc_bot_server/">
+    <meta property="og:image" content="https://cdn.discordapp.com/banners/1369933976713695302/a0ed5b2bc41c8814d96286663a1dcadb.jpg?size=2048">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Nexus Gaming & Café">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Nexus Gaming & Café">
+    <meta name="twitter:description" content="✨ Nexus Gaming & Café 🎮☕ your vibe sanctuary where games meet chill moments 🌙 connect with cool souls 🌿 share cute emojis 🖼 glow up your pfp 🤳 join lowkey events 🎉 and find your online fam 💫 good vibes only always 🕊">
+    <meta name="twitter:image" content="https://cdn.discordapp.com/banners/1369933976713695302/a0ed5b2bc41c8814d96286663a1dcadb.jpg?size=2048">
+    <meta name="twitter:url" content="https://jisutheking.github.io/ngc_bot_server/">
+    
     <title>Nexus Gaming & Café</title>
     <link rel="icon" href="https://cdn.discordapp.com/icons/1369933976713695302/a_e0efcd290dbf33f080860e3142bb36c2.gif" type="image/gif">
     <style>
@@ -429,6 +455,7 @@
             <img src="https://cdn.discordapp.com/icons/1369933976713695302/a_e0efcd290dbf33f080860e3142bb36c2.gif" alt="NGC Logo" class="server-logo">
             <div>
                 <h1 class="server-title">Welcome to Nexus Gaming & Café</h1>
+                <p class="server-subtitle">Your ultimate gaming community</p>
             </div>
         </div>
     </div>
@@ -456,7 +483,7 @@
             <!-- WidgetBot Iframe Embed -->
             <div class="iframe-container">
                 <iframe 
-                    src="https://e.widgetbot.io/channels/299881420891881473/355719584830980096" 
+                    src="https://e.widgetbot.io/channels/1369933976713695302/1369963263474798662" 
                     class="discord-iframe"
                     allow="clipboard-write; fullscreen" 
                     height="600" 
