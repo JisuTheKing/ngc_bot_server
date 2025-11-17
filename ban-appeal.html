@@ -6,19 +6,19 @@
     
     <!-- CSP Header to fix WidgetBot -->
     <meta http-equiv="Content-Security-Policy" content="
-        default-src 'self' https://*.widgetbot.io https://*.discord.com https://*.discordapp.com;
-        script-src 'self' 'unsafe-eval' https://cdn.jsdelivr.net https://storage.ko-fi.com;
-        style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
-        connect-src 'self' https://*.widgetbot.io https://*.discord.com https://*.discordapp.com;
-        frame-src 'self' https://*.widgetbot.io https://*.discord.com https://invidget.switchblade.xyz;
+        default-src 'self' https://*.widgetbot.io https://*.discord.com https://*.discordapp.com https://docs.google.com;
+        script-src 'self' 'unsafe-eval' https://cdn.jsdelivr.net https://storage.ko-fi.com https://docs.google.com;
+        style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://docs.google.com;
+        connect-src 'self' https://*.widgetbot.io https://*.discord.com https://*.discordapp.com https://docs.google.com;
+        frame-src 'self' https://*.widgetbot.io https://*.discord.com https://invidget.switchblade.xyz https://docs.google.com;
         img-src 'self' data: https: blob:;
     ">
     
     <!-- Discord Embed Meta Tags -->
-    <meta property="og:title" content="Nexus Gaming & Café | Your Gaming Sanctuary">
-    <meta property="og:description" content="✨ Nexus Gaming & Café 🎮☕ your vibe sanctuary where games meet chill moments 🌙 connect with cool souls 🌿 share cute emojis 🖼 glow up your pfp 🤳 join lowkey events 🎉 and find your online fam 💫 good vibes only always 🕊">
-    <meta property="og:url" content="https://jisutheking.github.io/ngc_bot_server/">
-    <meta property="og:image" content="https://cdn.discordapp.com/banners/1417871516456059031/d841338ac567bc35a40a148910641619.png?size=1024">
+    <meta property="og:title" content="Nexus Gaming & Café | Ban Appeal">
+    <meta property="og:description" content="Submit a ban appeal for Nexus Gaming & Café">
+    <meta property="og:url" content="https://jisutheking.github.io/ngc_bot_server/ban-appeal">
+    <meta property="og:image" content="https://cdn.discordapp.com/banners/1369933976713695302/a0ed5b2bc41c8814d96286663a1dcadb.jpg?size=1024">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Nexus Gaming & Café">
     
@@ -31,12 +31,12 @@
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Nexus Gaming & Café | Your Gaming Sanctuary">
-    <meta name="twitter:description" content="✨ Nexus Gaming & Café 🎮☕ your vibe sanctuary where games meet chill moments 🌙 connect with cool souls 🌿 share cute emojis 🖼 glow up your pfp 🤳 join lowkey events 🎉 and find your online fam 💫 good vibes only always 🕊">
+    <meta name="twitter:title" content="Nexus Gaming & Café | Ban Appeal">
+    <meta name="twitter:description" content="Submit a ban appeal for Nexus Gaming & Café">
     <meta name="twitter:image" content="https://cdn.discordapp.com/banners/1369933976713695302/a0ed5b2bc41c8814d96286663a1dcadb.jpg?size=1024">
-    <meta name="twitter:url" content="https://jisutheking.github.io/ngc_bot_server/">
+    <meta name="twitter:url" content="https://jisutheking.github.io/ngc_bot_server/ban-appeal">
     
-    <title>Nexus Gaming & Café | Your Gaming Sanctuary</title>
+    <title>Nexus Gaming & Café | Ban Appeal</title>
     <link rel="icon" href="https://cdn.discordapp.com/icons/1369933976713695302/a_e0efcd290dbf33f080860e3142bb36c2.gif" type="image/gif">
     <style>
         /* ---------- Base Styles ---------- */
@@ -260,88 +260,58 @@
             text-align: center;
         }
 
-        .content p {
-            font-size: 1.1em;
-            line-height: 1.7;
-            color: #f0f0f0;
-            margin-bottom: 20px;
-        }
-
-        .content strong {
-            color: #ffffff;
-            font-weight: 600;
-        }
-
-        /* ---------- Discord Embed Container ---------- */
-        .discord-embed-container {
-            max-width: 900px;
-            margin: 0 20px 40px;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .discord-embed-title {
-            font-size: 1.8em;
-            margin-bottom: 15px;
-            color: #ffffff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-        }
-
-        /* Widget Container Styling */
-        .widget-container {
-            background: rgba(0, 0, 0, 0.3);
+        /* Form Container */
+        .form-container {
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
-            padding: 20px;
-            margin-top: 15px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 30px;
+            padding: 30px;
+            margin: 20px 0;
+            border-left: 4px solid #ff6b6b;
         }
 
-        .iframe-container {
+        .form-title {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .form-description {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #f0f0f0;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .google-form {
             width: 100%;
-            display: flex;
-            justify-content: center;
-        }
-
-        .discord-iframe {
             border: none;
             border-radius: 8px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-            max-width: 100%;
         }
 
-        .widget-info {
-            text-align: center;
-            max-width: 600px;
+        .appeal-info {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 4px solid #ff6b6b;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            text-align: left;
         }
 
-        .widget-info img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-            margin-top: 15px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
+        .appeal-info h3 {
+            color: #ff6b6b;
+            margin-top: 0;
         }
 
-        .join-button {
-            display: inline-block;
-            padding: 12px 30px;
-            background: linear-gradient(135deg, #9fc1ff, #ff9cbf);
-            color: #1c1c1c;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: bold;
-            border: 2px solid white;
-            margin-top: 15px;
-            transition: all 0.3s ease;
+        .appeal-info ul {
+            padding-left: 20px;
         }
 
-        .join-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        .appeal-info li {
+            margin-bottom: 8px;
+            color: #f0f0f0;
         }
 
         /* ---------- Footer ---------- */
@@ -443,16 +413,12 @@
                 font-size: 1.6em;
             }
             
-            .discord-embed-container {
-                margin: 0 15px 30px;
+            .form-container {
+                padding: 20px;
             }
             
-            .discord-embed-title {
-                font-size: 1.5em;
-            }
-            
-            .discord-iframe {
-                height: 400px;
+            .google-form {
+                height: 1400px;
             }
         }
 
@@ -483,16 +449,8 @@
                 font-size: 1.4em;
             }
             
-            .content p {
-                font-size: 1em;
-            }
-            
-            .discord-embed-title {
-                font-size: 1.3em;
-            }
-            
-            .discord-iframe {
-                height: 350px;
+            .google-form {
+                height: 1600px;
             }
         }
     </style>
@@ -545,50 +503,42 @@
         <div class="logo-title-wrapper">
             <img src="https://cdn.discordapp.com/icons/1369933976713695302/a_2385c5695caabf2c04688e59681c3d36.gif" alt="NGC Logo" class="server-logo">
             <div>
-                <h1 class="server-title">Welcome to Nexus Gaming & Café</h1>
-                <p class="server-subtitle">Your ultimate gaming community</p>
+                <h1 class="server-title">Nexus Gaming & Café</h1>
+                <p class="server-subtitle">Ban Appeal Form</p>
             </div>
         </div>
     </div>
 
     <div class="content">
-        <h2>Empowering Nexus Gaming & Café</h2>
+        <h2>Submit a Ban Appeal</h2>
         
-        <p>
-            NGC Bot is your all-in-one solution for server management, moderation, and community engagement.
-            It brings advanced moderation commands, automation, member statistics, and smooth cross-server
-            communication to elevate your Discord experience.
-        </p>
-        <p>
-            Please review our <strong>Terms of Service</strong> and <strong>Privacy Policy</strong>,
-            and ensure you're familiar with our <strong>Server Rules</strong> before joining our server / using our N G C Bot.
-        </p>
-    </div>
-
-    <!-- Discord Embed Section -->
-    <div class="discord-embed-container">
-        <h3 class="discord-embed-title">Join the Conversation</h3>
-        <p>Chat with our community directly on our Discord server:</p>
-        
-        <div class="widget-container">
-            <!-- WidgetBot Iframe Embed -->
-            <div class="iframe-container">
-                <iframe 
-                    src="https://e.widgetbot.io/channels/1369933976713695302/1369963263474798662" 
-                    class="discord-iframe"
-                    allow="clipboard-write; fullscreen" 
-                    height="600" 
-                    width="800">
-                </iframe>
+        <div class="form-container">
+            <div class="form-title">Ban Appeal Form</div>
+            <div class="form-description">
+                Been banned from our server? Fill out the form below to submit an appeal.<br>
+                Please be honest and provide as much detail as possible for the best chance of success.
             </div>
             
-            <div class="widget-info">
-                <p>Use the chat window above to participate in our community discussions!</p>
-                
-                <a href="https://discord.gg/teEHVSY586" target="_blank" rel="noreferrer">
-                    <img src="https://invidget.switchblade.xyz/teEHVSY586?theme=dark" alt="Join Our Discord Server">
-                </a>
+            <div class="appeal-info">
+                <h3>Important Information:</h3>
+                <ul>
+                    <li>Appeals are reviewed by server administrators</li>
+                    <li>Response time may vary depending on staff availability</li>
+                    <li>Provide your exact Discord username and ID if possible</li>
+                    <li>Be respectful and honest in your appeal</li>
+                    <li>False information may result in permanent denial</li>
+                </ul>
             </div>
+            
+            <iframe 
+                src="https://docs.google.com/forms/d/e/1FAIpQLSeJkeBDuaXHBRoElDB837LAFp1W9c32k3PlbRiJ7KHMU9HvTA/viewform?embedded=true" 
+                class="google-form"
+                height="1500" 
+                frameborder="0" 
+                marginheight="0" 
+                marginwidth="0">
+                Loading…
+            </iframe>
         </div>
     </div>
 
@@ -596,9 +546,6 @@
         © 2025 Nexus Gaming & Café | N G C BOT
     </footer>
 
-    <!-- Ko-fi Integration -->
-    <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
-    
     <!-- Snowfall Animation Script -->
     <script>
         // Create snowfall animation
@@ -628,45 +575,10 @@
             }
         }
 
-        // URL Redirect Handler
-        function handleCustomRoutes() {
-            const path = window.location.pathname;
-            
-            // Remove trailing slash and .html if present
-            const cleanPath = path.replace(/\/$/, '').replace(/\.html$/, '');
-            
-            switch(cleanPath) {
-                case '/ngc_bot_server/discord':
-                    window.location.href = 'https://discord.gg/teEHVSY586';
-                    return true;
-                    
-                case '/ngc_bot_server/staff-apply':
-                    // This will be handled by the dedicated page
-                    // If we're on index.html but this path is accessed, redirect to proper page
-                    if (!window.location.href.includes('staff-apply')) {
-                        window.location.href = '/ngc_bot_server/staff-apply';
-                    }
-                    return true;
-                    
-                case '/ngc_bot_server/ban-appeal':
-                    // This will be handled by the dedicated page
-                    if (!window.location.href.includes('ban-appeal')) {
-                        window.location.href = '/ngc_bot_server/ban-appeal';
-                    }
-                    return true;
-            }
-            return false;
-        }
-
         // Initialize when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
             // Start snowfall immediately
             createSnowfall();
-            
-            // Handle custom routes first
-            if (handleCustomRoutes()) {
-                return; // Stop execution if redirecting
-            }
             
             // Hamburger menu functionality
             const hamburger = document.getElementById('hamburgerBtn');
@@ -687,44 +599,11 @@
                 });
             }
             
-            // Fix for Discord widget if needed
-            const discordWidget = document.querySelector('.widget-info img');
-            if (discordWidget) {
-                discordWidget.onerror = function() {
-                    console.log('Discord widget failed to load, showing fallback');
-                    this.style.display = 'none';
-                    const fallback = document.createElement('a');
-                    fallback.href = 'https://discord.gg/teEHVSY586';
-                    fallback.target = '_blank';
-                    fallback.rel = 'noreferrer';
-                    fallback.className = 'join-button';
-                    fallback.textContent = 'Join Our Discord Server';
-                    discordWidget.parentNode.appendChild(fallback);
-                };
-            }
-            
             // Clean URLs - Remove .html from address bar
-            if (window.history && window.history.pushState) {
-                let currentPath = window.location.pathname;
-                
-                // Only clean if we're on an .html page
-                if (currentPath.endsWith('.html')) {
-                    let cleanPath = currentPath.replace(/\.html$/, '');
-                    window.history.replaceState({}, document.title, cleanPath);
-                }
+            if (window.location.pathname.endsWith('.html')) {
+                const cleanPath = window.location.pathname.replace(/\.html$/, '');
+                window.history.replaceState({}, document.title, cleanPath);
             }
-            
-            // Update ALL links on page to use clean URLs
-            const allLinks = document.querySelectorAll('a[href]');
-            allLinks.forEach(link => {
-                let href = link.getAttribute('href');
-                
-                // Convert .html links to clean URLs
-                if (href.includes('.html') && !href.startsWith('http')) {
-                    let cleanHref = href.replace(/\.html$/, '');
-                    link.setAttribute('href', cleanHref);
-                }
-            });
         });
     </script>
 
