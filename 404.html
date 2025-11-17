@@ -36,7 +36,7 @@
     <meta name="twitter:image" content="https://cdn.discordapp.com/banners/1369933976713695302/a0ed5b2bc41c8814d96286663a1dcadb.jpg?size=1024">
     <meta name="twitter:url" content="https://jisutheking.github.io/ngc_bot_server/404">
     
-    <title>Page Not Found | Nexus Gaming & Café</title>
+    <title>WRONG TURN? | Nexus Gaming & Café</title>
     <link rel="icon" href="https://cdn.discordapp.com/icons/1369933976713695302/a_e0efcd290dbf33f080860e3142bb36c2.gif" type="image/gif">
     <style>
         /* ---------- Base Styles ---------- */
@@ -190,94 +190,123 @@
             transition: all 0.3s ease;
         }
 
-        /* ---------- Header with Fixed Logo Alignment ---------- */
-        .header-container {
+        /* ---------- 404 Content Layout ---------- */
+        .error-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             width: 100%;
-            padding: 20px 0;
-            margin: 80px 0 20px 0;
+            max-width: 1200px;
+            margin: 100px 20px 40px;
             position: relative;
             z-index: 2;
         }
 
-        .logo-title-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            width: 100%;
-        }
-
-        .server-logo {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
-            display: block;
-            margin: 0 auto;
-        }
-
-        .server-title {
-            margin: 0;
-            font-size: 2.8em;
-            font-weight: 600;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-            text-align: center;
-            line-height: 1.2;
-        }
-
-        .server-subtitle {
-            margin: 5px 0 0 0;
-            font-size: 1.2em;
-            color: rgba(255, 255, 255, 0.9);
-            text-align: center;
-            font-weight: 300;
-        }
-
-        /* ---------- 404 Content Box ---------- */
         .error-content {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            width: 100%;
             background: rgba(0, 0, 0, 0.55);
-            padding: 40px 60px;
+            padding: 40px;
             border-radius: 15px;
             box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
-            max-width: 900px;
-            margin: 0 20px 40px;
-            overflow-y: auto;
-            position: relative;
-            z-index: 2;
         }
 
-        .error-content h2 {
-            font-size: 2.5em;
-            margin-bottom: 15px;
-            color: #ffffff;
-            text-align: center;
+        .error-text {
+            flex: 1;
+            text-align: left;
+            padding-right: 20px;
         }
 
-        .error-content p {
-            font-size: 1.1em;
-            line-height: 1.7;
-            color: #f0f0f0;
-            margin-bottom: 20px;
-        }
-
-        .error-content strong {
-            color: #ffffff;
-            font-weight: 600;
+        .error-image-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .error-image {
             max-width: 100%;
             height: auto;
             border-radius: 15px;
-            margin: 20px 0;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .error-title {
+            font-size: 3.5em;
+            font-weight: 700;
+            margin: 0 0 20px 0;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            line-height: 1.1;
+        }
+
+        .error-subtitle {
+            font-size: 1.3em;
+            line-height: 1.7;
+            color: #f0f0f0;
+            margin-bottom: 30px;
+        }
+
+        .error-message-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-left: 4px solid #ff6b6b;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 1em;
+            line-height: 1.6;
+        }
+
+        .error-message-box .error-path {
+            color: #ff9c9c;
+            font-weight: bold;
+            word-break: break-all;
+        }
+
+        .error-message-box .error-note {
+            color: #cccccc;
+            font-style: italic;
+            margin-top: 10px;
+            display: block;
+        }
+
+        .help-links {
+            margin-top: 30px;
+        }
+
+        .help-links p {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            color: #f0f0f0;
+        }
+
+        .link-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .link-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .link-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
         }
 
         .home-button {
@@ -289,38 +318,13 @@
             border-radius: 25px;
             font-weight: bold;
             border: 2px solid white;
-            margin-top: 15px;
+            margin-top: 20px;
             transition: all 0.3s ease;
         }
 
         .home-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        /* Error Message Box */
-        .error-message-box {
-            background: rgba(255, 255, 255, 0.1);
-            border-left: 4px solid #ff6b6b;
-            padding: 20px;
-            margin: 25px 0;
-            border-radius: 8px;
-            text-align: left;
-            font-family: 'Courier New', monospace;
-            font-size: 1em;
-            line-height: 1.6;
-        }
-
-        .error-message-box .error-path {
-            color: #ff9c9c;
-            font-weight: bold;
-        }
-
-        .error-message-box .error-note {
-            color: #cccccc;
-            font-style: italic;
-            margin-top: 10px;
-            display: block;
         }
 
         /* ---------- Footer ---------- */
@@ -334,25 +338,6 @@
             width: 100%;
             position: relative;
             z-index: 2;
-        }
-
-        /* Scrollbar Styling */
-        .error-content::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .error-content::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-        }
-
-        .error-content::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #9fc1ff, #ff9cbf);
-            border-radius: 10px;
-        }
-
-        .error-content::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #7da9ff, #ff7ba8);
         }
 
         /* ---------- MOBILE STYLES - FIXED ---------- */
@@ -405,26 +390,36 @@
                 transform: rotate(-45deg) translate(7px, -6px);
             }
 
-            .server-title {
-                font-size: 2.2em;
+            .error-container {
+                margin: 80px 15px 30px;
             }
-            
-            .server-subtitle {
-                font-size: 1em;
-            }
-            
+
             .error-content {
+                flex-direction: column;
                 padding: 30px 20px;
-                margin: 0 15px 30px;
+                gap: 30px;
+            }
+
+            .error-text {
+                text-align: center;
+                padding-right: 0;
+            }
+
+            .error-title {
+                font-size: 2.5em;
             }
             
-            .error-content h2 {
-                font-size: 1.8em;
+            .error-subtitle {
+                font-size: 1.1em;
             }
             
             .error-message-box {
                 padding: 15px;
                 font-size: 0.9em;
+            }
+
+            .link-buttons {
+                justify-content: center;
             }
         }
 
@@ -442,26 +437,27 @@
                 height: 35px;
             }
 
-            .server-title {
-                font-size: 1.8em;
+            .error-title {
+                font-size: 2em;
             }
             
-            .server-logo {
-                width: 100px;
-                height: 100px;
-            }
-            
-            .error-content h2 {
-                font-size: 1.6em;
-            }
-            
-            .error-content p {
+            .error-subtitle {
                 font-size: 1em;
             }
             
             .error-message-box {
                 padding: 12px;
                 font-size: 0.85em;
+            }
+
+            .link-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .link-button {
+                width: 200px;
+                text-align: center;
             }
         }
     </style>
@@ -509,39 +505,40 @@
         </div>
     </nav>
 
-    <!-- Header with Properly Aligned Logo -->
-    <div class="header-container">
-        <div class="logo-title-wrapper">
-            <img src="https://cdn.discordapp.com/icons/1369933976713695302/a_2385c5695caabf2c04688e59681c3d36.gif" alt="NGC Logo" class="server-logo">
-            <div>
-                <h1 class="server-title">404 - Connection Lost</h1>
-                <p class="server-subtitle">Game Over? Not quite!</p>
+    <!-- 404 Error Content -->
+    <div class="error-container">
+        <div class="error-content">
+            <div class="error-text">
+                <h1 class="error-title">WRONG TURN?</h1>
+                
+                <p class="error-subtitle">
+                    You look lost, stranger. You know what helps when you're lost? A piping hot bowl of noodles. 
+                    Take a seat, we're frantically at work here cooking up something good.
+                </p>
+                
+                <!-- Dynamic Error Message -->
+                <div class="error-message-box">
+                    <span class="error-path" id="errorPath">The URL /thewrongdestinationpath was not located on this server.</span>
+                    <span class="error-note">This is the full extent of the information we can provide.</span>
+                </div>
+                
+                <div class="help-links">
+                    <p>Oh, you need something to read? These might help you:</p>
+                    <div class="link-buttons">
+                        <a href="#" class="link-button">Status Page</a>
+                        <a href="https://discord.gg/teEHVSY586" class="link-button" target="_blank">@Discord</a>
+                        <a href="https://discord.gg/teEHVSY586" class="link-button" target="_blank">Discord Support</a>
+                    </div>
+                </div>
+                
+                <a href="/ngc_bot_server/" class="home-button">Return to Home Base</a>
+            </div>
+            
+            <div class="error-image-container">
+                <img src="https://media.discordapp.net/attachments/1437029156507353188/1440040093564928011/1763401955164.png?ex=691cb558&is=691b63d8&hm=b69be731810397a5c76e8a57fc5740225b6843b2ddae6c6628ebf135eaff791d&=&format=webp&quality=lossless&width=930&height=930" 
+                     alt="404 Error" class="error-image">
             </div>
         </div>
-    </div>
-
-    <!-- 404 Error Content -->
-    <div class="error-content">
-        <h2>Page Not Found</h2>
-        
-        <p>
-            It looks like you've ventured into uncharted territory! The destination you're trying to reach doesn't exist in our server directory.
-        </p>
-        
-        <!-- Your Custom Error Message -->
-        <div class="error-message-box">
-            <span class="error-path" id="errorPath">The URL /thewrongdestinationpath was not located on this server.</span>
-            <span class="error-note">This is the full extent of the information we can provide.</span>
-        </div>
-        
-        <img src="https://media.discordapp.net/attachments/1437029156507353188/1440040093564928011/1763401955164.png?ex=691cb558&is=691b63d8&hm=b69be731810397a5c76e8a57fc5740225b6843b2ddae6c6628ebf135eaff791d&=&format=webp&quality=lossless&width=930&height=930" 
-             alt="404 Error" class="error-image">
-        
-        <p>
-            Don't worry, even the best gamers sometimes take wrong turns. Let's get you back to the main hub!
-        </p>
-        
-        <a href="/ngc_bot_server/" class="home-button">Return to Home Base</a>
     </div>
 
     <footer>
