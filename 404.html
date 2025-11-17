@@ -14,34 +14,11 @@
         img-src 'self' data: https: blob:;
     ">
     
-    <!-- Discord Embed Meta Tags -->
-    <meta property="og:title" content="Page Not Found | Nexus Gaming & Café">
-    <meta property="og:description" content="Oops! The page you're looking for doesn't exist. Return to Nexus Gaming & Café.">
-    <meta property="og:url" content="https://jisutheking.github.io/ngc_bot_server/404">
-    <meta property="og:image" content="https://cdn.discordapp.com/banners/1417871516456059031/d841338ac567bc35a40a148910641619.png?size=1024">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Nexus Gaming & Café">
-    
-    <!-- Additional Meta Tags for Better Discord Display -->
-    <meta name="theme-color" content="#9fc1ff">
-    <meta property="og:color" content="#9fc1ff">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:type" content="image/jpeg">
-    
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Page Not Found | Nexus Gaming & Café">
-    <meta name="twitter:description" content="Oops! The page you're looking for doesn't exist. Return to Nexus Gaming & Café.">
-    <meta name="twitter:image" content="https://cdn.discordapp.com/banners/1369933976713695302/a0ed5b2bc41c8814d96286663a1dcadb.jpg?size=1024">
-    <meta name="twitter:url" content="https://jisutheking.github.io/ngc_bot_server/404">
-    
     <title>WRONG TURN? | Nexus Gaming & Café</title>
     <link rel="icon" href="https://cdn.discordapp.com/icons/1369933976713695302/a_e0efcd290dbf33f080860e3142bb36c2.gif" type="image/gif">
     <style>
-        /* ---------- Base Styles ---------- */
         body {
-            background: linear-gradient(135deg, #9fc1ff, #ff9cbf);
+            background: linear-gradient(135deg, #0a0a2a, #1a1a4a, #2d1a4a);
             font-family: 'Poppins', Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -53,6 +30,35 @@
             text-align: center;
             overflow-x: hidden;
             position: relative;
+        }
+
+        /* Space Background with Stars */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+                radial-gradient(2px 2px at 40px 70px, #fff, transparent),
+                radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+                radial-gradient(1px 1px at 130px 80px, #fff, transparent),
+                radial-gradient(2px 2px at 160px 30px, #eee, transparent),
+                radial-gradient(1px 1px at 200px 60px, #fff, transparent),
+                radial-gradient(2px 2px at 250px 90px, #eee, transparent),
+                radial-gradient(1px 1px at 300px 40px, #fff, transparent),
+                radial-gradient(2px 2px at 340px 70px, #eee, transparent),
+                radial-gradient(1px 1px at 380px 20px, #fff, transparent);
+            background-size: 400px 400px;
+            z-index: -1;
+            animation: twinkle 8s infinite linear;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
         }
 
         /* Snowflake Container */
@@ -78,7 +84,6 @@
             text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
         }
 
-        /* Snowfall Animations */
         @keyframes fall {
             0% {
                 transform: translateY(-10px) translateX(0) rotate(0deg);
@@ -87,30 +92,19 @@
                 transform: translateY(100vh) translateX(20px) rotate(360deg);
             }
         }
-        
-        @keyframes sway {
-            0% {
-                transform: translateX(0);
-            }
-            50% {
-                transform: translateX(15px);
-            }
-            100% {
-                transform: translateX(-10px);
-            }
-        }
 
-        /* ---------- Responsive Navigation Bar ---------- */
+        /* Navigation */
         .navbar {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(10, 10, 30, 0.9);
             backdrop-filter: blur(10px);
             z-index: 1000;
             padding: 10px 0;
             box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .nav-container {
@@ -146,10 +140,6 @@
             gap: 20px;
         }
 
-        .nav-item {
-            position: relative;
-        }
-
         .nav-link {
             color: #fff;
             text-decoration: none;
@@ -167,9 +157,8 @@
             transform: translateY(-2px);
         }
 
-        /* HAMBURGER BUTTON - FIXED VISIBILITY */
         .hamburger {
-            display: none; /* Hidden on desktop */
+            display: none;
             flex-direction: column;
             cursor: pointer;
             background: none;
@@ -190,10 +179,9 @@
             transition: all 0.3s ease;
         }
 
-        /* ---------- 404 Content Layout ---------- */
+        /* 404 Content */
         .error-container {
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             width: 100%;
@@ -201,25 +189,18 @@
             margin: 100px 20px 40px;
             position: relative;
             z-index: 2;
-        }
-
-        .error-content {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            gap: 40px;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.55);
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+            gap: 60px;
         }
 
         .error-text {
             flex: 1;
             text-align: left;
-            padding-right: 20px;
+            background: rgba(10, 10, 30, 0.8);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(100, 100, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
         }
 
         .error-image-container {
@@ -233,7 +214,7 @@
             max-width: 100%;
             height: auto;
             border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            filter: drop-shadow(0 0 20px rgba(100, 100, 255, 0.3));
         }
 
         .error-title {
@@ -241,19 +222,23 @@
             font-weight: 700;
             margin: 0 0 20px 0;
             color: #fff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            text-shadow: 0 0 10px rgba(100, 100, 255, 0.5);
             line-height: 1.1;
+            background: linear-gradient(135deg, #9fc1ff, #ff9cbf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .error-subtitle {
             font-size: 1.3em;
             line-height: 1.7;
-            color: #f0f0f0;
+            color: #e0e0ff;
             margin-bottom: 30px;
         }
 
         .error-message-box {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             border-left: 4px solid #ff6b6b;
             padding: 20px;
             margin: 25px 0;
@@ -261,16 +246,17 @@
             font-family: 'Courier New', monospace;
             font-size: 1em;
             line-height: 1.6;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .error-message-box .error-path {
+        .error-path {
             color: #ff9c9c;
             font-weight: bold;
             word-break: break-all;
         }
 
-        .error-message-box .error-note {
-            color: #cccccc;
+        .error-note {
+            color: #ccccff;
             font-style: italic;
             margin-top: 10px;
             display: block;
@@ -283,7 +269,7 @@
         .help-links p {
             font-size: 1.1em;
             margin-bottom: 15px;
-            color: #f0f0f0;
+            color: #e0e0ff;
         }
 
         .link-buttons {
@@ -294,57 +280,62 @@
 
         .link-button {
             display: inline-block;
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.1);
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: #fff;
             text-decoration: none;
             border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             transition: all 0.3s ease;
             font-weight: 500;
         }
 
         .link-button:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: linear-gradient(135deg, #764ba2, #667eea);
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .support-button {
+            background: linear-gradient(135deg, #ff9cbf, #9fc1ff) !important;
+            color: #1a1a4a !important;
+            font-weight: bold;
         }
 
         .home-button {
             display: inline-block;
-            padding: 12px 30px;
+            padding: 14px 35px;
             background: linear-gradient(135deg, #9fc1ff, #ff9cbf);
             color: #1c1c1c;
             text-decoration: none;
             border-radius: 25px;
             font-weight: bold;
-            border: 2px solid white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
             margin-top: 20px;
             transition: all 0.3s ease;
+            font-size: 1.1em;
         }
 
         .home-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 20px rgba(159, 193, 255, 0.4);
         }
 
-        /* ---------- Footer ---------- */
         footer {
             margin-top: 40px;
             text-align: center;
-            color: #fff;
+            color: #a0a0ff;
             font-size: 0.95em;
-            text-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
             padding: 20px;
             width: 100%;
             position: relative;
             z-index: 2;
         }
 
-        /* ---------- MOBILE STYLES - FIXED ---------- */
+        /* Mobile Styles */
         @media screen and (max-width: 768px) {
-            /* SHOW HAMBURGER ON MOBILE */
             .hamburger {
-                display: flex !important; /* FORCE VISIBLE */
+                display: flex !important;
                 z-index: 1001;
             }
 
@@ -353,7 +344,7 @@
                 left: -100%;
                 top: 70px;
                 flex-direction: column;
-                background-color: rgba(0, 0, 0, 0.95);
+                background-color: rgba(10, 10, 30, 0.95);
                 width: 100%;
                 text-align: center;
                 transition: 0.3s;
@@ -366,10 +357,6 @@
                 left: 0;
             }
 
-            .nav-item {
-                margin: 10px 0;
-            }
-
             .nav-link {
                 padding: 15px;
                 border-radius: 0;
@@ -377,7 +364,6 @@
                 border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             }
 
-            /* Hamburger animation */
             .hamburger.active span:nth-child(1) {
                 transform: rotate(45deg) translate(5px, 5px);
             }
@@ -391,18 +377,14 @@
             }
 
             .error-container {
-                margin: 80px 15px 30px;
-            }
-
-            .error-content {
                 flex-direction: column;
-                padding: 30px 20px;
+                margin: 80px 15px 30px;
                 gap: 30px;
             }
 
             .error-text {
                 text-align: center;
-                padding-right: 0;
+                padding: 30px 20px;
             }
 
             .error-title {
@@ -467,7 +449,7 @@
     <!-- Snow Container -->
     <div id="snow-container"></div>
 
-    <!-- Responsive Navigation Bar -->
+    <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="nav-container">
             <a href="/ngc_bot_server/" class="nav-logo">
@@ -496,7 +478,6 @@
                 </li>
             </ul>
             
-            <!-- HAMBURGER BUTTON - NOW VISIBLE ON MOBILE -->
             <button class="hamburger" id="hamburgerBtn">
                 <span></span>
                 <span></span>
@@ -505,39 +486,36 @@
         </div>
     </nav>
 
-    <!-- 404 Error Content -->
+    <!-- 404 Content -->
     <div class="error-container">
-        <div class="error-content">
-            <div class="error-text">
-                <h1 class="error-title">WRONG TURN?</h1>
-                
-                <p class="error-subtitle">
-                    You look lost, stranger. You know what helps when you're lost? A piping hot bowl of noodles. 
-                    Take a seat, we're frantically at work here cooking up something good.
-                </p>
-                
-                <!-- Dynamic Error Message -->
-                <div class="error-message-box">
-                    <span class="error-path" id="errorPath">The URL /thewrongdestinationpath was not located on this server.</span>
-                    <span class="error-note">This is the full extent of the information we can provide.</span>
-                </div>
-                
-                <div class="help-links">
-                    <p>Oh, you need something to read? These might help you:</p>
-                    <div class="link-buttons">
-                        <a href="#" class="link-button">Status Page</a>
-                        <a href="https://discord.gg/teEHVSY586" class="link-button" target="_blank">@Discord</a>
-                        <a href="https://discord.gg/teEHVSY586" class="link-button" target="_blank">Discord Support</a>
-                    </div>
-                </div>
-                
-                <a href="/ngc_bot_server/" class="home-button">Return to Home Base</a>
+        <div class="error-text">
+            <h1 class="error-title">WRONG TURN?</h1>
+            
+            <p class="error-subtitle">
+                You look lost, stranger. You know what helps when you're lost? A piping hot bowl of noodles. 
+                Take a seat, we're frantically at work here cooking up something good.
+            </p>
+            
+            <div class="error-message-box">
+                <span class="error-path" id="errorPath">The URL /thewrongdestinationpath was not located on this server.</span>
+                <span class="error-note">This is the full extent of the information we can provide.</span>
             </div>
             
-            <div class="error-image-container">
-                <img src="https://media.discordapp.net/attachments/1437029156507353188/1440040093564928011/1763401955164.png?ex=691cb558&is=691b63d8&hm=b69be731810397a5c76e8a57fc5740225b6843b2ddae6c6628ebf135eaff791d&=&format=webp&quality=lossless&width=930&height=930" 
-                     alt="404 Error" class="error-image">
+            <div class="help-links">
+                <p>Oh, you need something to read? These might help you:</p>
+                <div class="link-buttons">
+                    <a href="/ngc_bot_server/status" class="link-button support-button">Support</a>
+                    <a href="/ngc_bot_server/trial" class="link-button">Start free trial</a>
+                    <a href="https://discord.gg/teEHVSY586" class="link-button" target="_blank">@Discord</a>
+                </div>
             </div>
+            
+            <a href="/ngc_bot_server/" class="home-button">Return to Home Base</a>
+        </div>
+        
+        <div class="error-image-container">
+            <img src="https://media.discordapp.net/attachments/1437029156507353188/1440054433252900986/1763406043189.png?ex=691cc2b3&is=691b7133&hm=40d7e78dffe0ec65e9f4e75d94a6acf98ea680760ab243cb88b1ecb5d7ac06a8&=&format=webp&quality=lossless&width=930&height=930" 
+                 alt="404 Error" class="error-image">
         </div>
     </div>
 
@@ -545,20 +523,17 @@
         © 2025 Nexus Gaming & Café | N G C BOT
     </footer>
 
-    <!-- Snowfall Animation Script -->
     <script>
-        // Create snowfall animation
         function createSnowfall() {
             const snowContainer = document.getElementById('snow-container');
-            const snowflakes = ['❄', '❅', '❆', '•', '·'];
-            const numSnowflakes = 80;
+            const snowflakes = ['❄', '⭐', '✨', '•', '·'];
+            const numSnowflakes = 60;
             
             for (let i = 0; i < numSnowflakes; i++) {
                 const snowflake = document.createElement('div');
                 snowflake.className = 'snowflake';
                 snowflake.textContent = snowflakes[Math.floor(Math.random() * snowflakes.length)];
                 
-                // Random properties for each snowflake
                 const size = Math.random() * 1.5 + 0.5;
                 const startPosition = Math.random() * 100;
                 const animationDuration = Math.random() * 8 + 5;
@@ -574,7 +549,6 @@
             }
         }
 
-        // Show actual requested path in error message
         function updateErrorPath() {
             const errorPathElement = document.getElementById('errorPath');
             if (errorPathElement) {
@@ -583,15 +557,10 @@
             }
         }
 
-        // Initialize when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
-            // Start snowfall immediately
             createSnowfall();
-            
-            // Update error message with actual path
             updateErrorPath();
             
-            // Hamburger menu functionality
             const hamburger = document.getElementById('hamburgerBtn');
             const navMenu = document.querySelector('.nav-menu');
             
@@ -601,7 +570,6 @@
                     navMenu.classList.toggle('active');
                 });
                 
-                // Close menu when clicking links
                 document.querySelectorAll('.nav-link').forEach(link => {
                     link.addEventListener('click', () => {
                         hamburger.classList.remove('active');
@@ -610,23 +578,10 @@
                 });
             }
             
-            // Clean URLs - Remove .html from address bar
-            if (window.history && window.history.pushState) {
-                let currentPath = window.location.pathname;
-                
-                // Only clean if we're on an .html page
-                if (currentPath.endsWith('.html')) {
-                    let cleanPath = currentPath.replace(/\.html$/, '');
-                    window.history.replaceState({}, document.title, cleanPath);
-                }
-            }
-            
-            // Update ALL links on page to use clean URLs
+            // Fix all internal links to remove .html
             const allLinks = document.querySelectorAll('a[href]');
             allLinks.forEach(link => {
                 let href = link.getAttribute('href');
-                
-                // Convert .html links to clean URLs
                 if (href.includes('.html') && !href.startsWith('http')) {
                     let cleanHref = href.replace(/\.html$/, '');
                     link.setAttribute('href', cleanHref);
