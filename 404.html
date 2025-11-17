@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- CSP Header to fix WidgetBot -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self' https://*.widgetbot.io https://*.discord.com https://*.discordapp.com;
+        script-src 'self' 'unsafe-eval' https://cdn.jsdelivr.net https://storage.ko-fi.com;
+        style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+        connect-src 'self' https://*.widgetbot.io https://*.discord.com https://*.discordapp.com;
+        frame-src 'self' https://*.widgetbot.io https://*.discord.com https://invidget.switchblade.xyz;
+        img-src 'self' data: https: blob:;
+    ">
+    
+    <!-- Discord Embed Meta Tags -->
+    <meta property="og:title" content="Page Not Found | Nexus Gaming & Café">
+    <meta property="og:description" content="Oops! The page you're looking for doesn't exist. Return to Nexus Gaming & Café.">
+    <meta property="og:url" content="https://jisutheking.github.io/ngc_bot_server/404">
+    <meta property="og:image" content="https://cdn.discordapp.com/banners/1417871516456059031/d841338ac567bc35a40a148910641619.png?size=1024">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Nexus Gaming & Café">
+    
+    <!-- Additional Meta Tags for Better Discord Display -->
+    <meta name="theme-color" content="#9fc1ff">
+    <meta property="og:color" content="#9fc1ff">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/jpeg">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Page Not Found | Nexus Gaming & Café">
+    <meta name="twitter:description" content="Oops! The page you're looking for doesn't exist. Return to Nexus Gaming & Café.">
+    <meta name="twitter:image" content="https://cdn.discordapp.com/banners/1369933976713695302/a0ed5b2bc41c8814d96286663a1dcadb.jpg?size=1024">
+    <meta name="twitter:url" content="https://jisutheking.github.io/ngc_bot_server/404">
+    
+    <title>Page Not Found | Nexus Gaming & Café</title>
+    <link rel="icon" href="https://cdn.discordapp.com/icons/1369933976713695302/a_e0efcd290dbf33f080860e3142bb36c2.gif" type="image/gif">
+    <style>
+        /* ---------- Base Styles ---------- */
+        body {
+            background: linear-gradient(135deg, #9fc1ff, #ff9cbf);
+            font-family: 'Poppins', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Snowflake Container */
+        #snow-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: white;
+            font-size: 1em;
+            user-select: none;
+            pointer-events: none;
+            opacity: 0.8;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Snowfall Animations */
+        @keyframes fall {
+            0% {
+                transform: translateY(-10px) translateX(0) rotate(0deg);
+            }
+            100% {
+                transform: translateY(100vh) translateX(20px) rotate(360deg);
+            }
+        }
+        
+        @keyframes sway {
+            0% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(15px);
+            }
+            100% {
+                transform: translateX(-10px);
+            }
+        }
+
+        /* ---------- Responsive Navigation Bar ---------- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 10px 0;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .nav-logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 20px;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            display: block;
+            font-weight: 500;
+            border: 1px solid transparent;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* HAMBURGER BUTTON - FIXED VISIBILITY */
+        .hamburger {
+            display: none; /* Hidden on desktop */
+            flex-direction: column;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 5px;
+            width: 40px;
+            height: 40px;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* ---------- Header with Fixed Logo Alignment ---------- */
+        .header-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 20px 0;
+            margin: 80px 0 20px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-title-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .server-logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+            display: block;
+            margin: 0 auto;
+        }
+
+        .server-title {
+            margin: 0;
+            font-size: 2.8em;
+            font-weight: 600;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .server-subtitle {
+            margin: 5px 0 0 0;
+            font-size: 1.2em;
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            font-weight: 300;
+        }
+
+        /* ---------- 404 Content Box ---------- */
+        .error-content {
+            background: rgba(0, 0, 0, 0.55);
+            padding: 40px 60px;
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+            max-width: 900px;
+            margin: 0 20px 40px;
+            overflow-y: auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .error-content h2 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .error-content p {
+            font-size: 1.1em;
+            line-height: 1.7;
+            color: #f0f0f0;
+            margin-bottom: 20px;
+        }
+
+        .error-content strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .error-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .home-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #9fc1ff, #ff9cbf);
+            color: #1c1c1c;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            border: 2px solid white;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .home-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Error Message Box */
+        .error-message-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-left: 4px solid #ff6b6b;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            font-size: 1em;
+            line-height: 1.6;
+        }
+
+        .error-message-box .error-path {
+            color: #ff9c9c;
+            font-weight: bold;
+        }
+
+        .error-message-box .error-note {
+            color: #cccccc;
+            font-style: italic;
+            margin-top: 10px;
+            display: block;
+        }
+
+        /* ---------- Footer ---------- */
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #fff;
+            font-size: 0.95em;
+            text-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Scrollbar Styling */
+        .error-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .error-content::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .error-content::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #9fc1ff, #ff9cbf);
+            border-radius: 10px;
+        }
+
+        .error-content::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #7da9ff, #ff7ba8);
+        }
+
+        /* ---------- MOBILE STYLES - FIXED ---------- */
+        @media screen and (max-width: 768px) {
+            /* SHOW HAMBURGER ON MOBILE */
+            .hamburger {
+                display: flex !important; /* FORCE VISIBLE */
+                z-index: 1001;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: rgba(0, 0, 0, 0.95);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.5);
+                padding: 20px 0;
+                gap: 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-item {
+                margin: 10px 0;
+            }
+
+            .nav-link {
+                padding: 15px;
+                border-radius: 0;
+                border: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            /* Hamburger animation */
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+
+            .server-title {
+                font-size: 2.2em;
+            }
+            
+            .server-subtitle {
+                font-size: 1em;
+            }
+            
+            .error-content {
+                padding: 30px 20px;
+                margin: 0 15px 30px;
+            }
+            
+            .error-content h2 {
+                font-size: 1.8em;
+            }
+            
+            .error-message-box {
+                padding: 15px;
+                font-size: 0.9em;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .nav-container {
+                padding: 0 15px;
+            }
+
+            .nav-logo {
+                font-size: 1em;
+            }
+
+            .nav-logo img {
+                width: 35px;
+                height: 35px;
+            }
+
+            .server-title {
+                font-size: 1.8em;
+            }
+            
+            .server-logo {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .error-content h2 {
+                font-size: 1.6em;
+            }
+            
+            .error-content p {
+                font-size: 1em;
+            }
+            
+            .error-message-box {
+                padding: 12px;
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Snow Container -->
+    <div id="snow-container"></div>
+
+    <!-- Responsive Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/ngc_bot_server/" class="nav-logo">
+                <img src="https://cdn.discordapp.com/icons/1369933976713695302/a_2385c5695caabf2c04688e59681c3d36.gif" alt="NGC Logo">
+                <span>Nexus Gaming & Café</span>
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="/ngc_bot_server/" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/ngc_bot_server/rules" class="nav-link">Server Rules</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/ngc_bot_server/tos" class="nav-link">Terms of Service</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/ngc_bot_server/privacy" class="nav-link">Privacy Policy</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/ngc_bot_server/staff-apply" class="nav-link">Staff Apply</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/ngc_bot_server/ban-appeal" class="nav-link">Ban Appeal</a>
+                </li>
+            </ul>
+            
+            <!-- HAMBURGER BUTTON - NOW VISIBLE ON MOBILE -->
+            <button class="hamburger" id="hamburgerBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Header with Properly Aligned Logo -->
+    <div class="header-container">
+        <div class="logo-title-wrapper">
+            <img src="https://cdn.discordapp.com/icons/1369933976713695302/a_2385c5695caabf2c04688e59681c3d36.gif" alt="NGC Logo" class="server-logo">
+            <div>
+                <h1 class="server-title">404 - Connection Lost</h1>
+                <p class="server-subtitle">Game Over? Not quite!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 404 Error Content -->
+    <div class="error-content">
+        <h2>Page Not Found</h2>
+        
+        <p>
+            It looks like you've ventured into uncharted territory! The destination you're trying to reach doesn't exist in our server directory.
+        </p>
+        
+        <!-- Your Custom Error Message -->
+        <div class="error-message-box">
+            <span class="error-path" id="errorPath">The URL /thewrongdestinationpath was not located on this server.</span>
+            <span class="error-note">This is the full extent of the information we can provide.</span>
+        </div>
+        
+        <img src="https://media.discordapp.net/attachments/1437029156507353188/1440040093564928011/1763401955164.png?ex=691cb558&is=691b63d8&hm=b69be731810397a5c76e8a57fc5740225b6843b2ddae6c6628ebf135eaff791d&=&format=webp&quality=lossless&width=930&height=930" 
+             alt="404 Error" class="error-image">
+        
+        <p>
+            Don't worry, even the best gamers sometimes take wrong turns. Let's get you back to the main hub!
+        </p>
+        
+        <a href="/ngc_bot_server/" class="home-button">Return to Home Base</a>
+    </div>
+
+    <footer>
+        © 2025 Nexus Gaming & Café | N G C BOT
+    </footer>
+
+    <!-- Snowfall Animation Script -->
+    <script>
+        // Create snowfall animation
+        function createSnowfall() {
+            const snowContainer = document.getElementById('snow-container');
+            const snowflakes = ['❄', '❅', '❆', '•', '·'];
+            const numSnowflakes = 80;
+            
+            for (let i = 0; i < numSnowflakes; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.textContent = snowflakes[Math.floor(Math.random() * snowflakes.length)];
+                
+                // Random properties for each snowflake
+                const size = Math.random() * 1.5 + 0.5;
+                const startPosition = Math.random() * 100;
+                const animationDuration = Math.random() * 8 + 5;
+                const opacity = Math.random() * 0.7 + 0.3;
+                const delay = Math.random() * 5;
+                
+                snowflake.style.left = `${startPosition}vw`;
+                snowflake.style.fontSize = `${size}em`;
+                snowflake.style.opacity = opacity;
+                snowflake.style.animation = `fall ${animationDuration}s linear ${delay}s infinite`;
+                
+                snowContainer.appendChild(snowflake);
+            }
+        }
+
+        // Show actual requested path in error message
+        function updateErrorPath() {
+            const errorPathElement = document.getElementById('errorPath');
+            if (errorPathElement) {
+                const currentPath = window.location.pathname;
+                errorPathElement.textContent = `The URL ${currentPath} was not located on this server.`;
+            }
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Start snowfall immediately
+            createSnowfall();
+            
+            // Update error message with actual path
+            updateErrorPath();
+            
+            // Hamburger menu functionality
+            const hamburger = document.getElementById('hamburgerBtn');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+                
+                // Close menu when clicking links
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', () => {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    });
+                });
+            }
+            
+            // Clean URLs - Remove .html from address bar
+            if (window.history && window.history.pushState) {
+                let currentPath = window.location.pathname;
+                
+                // Only clean if we're on an .html page
+                if (currentPath.endsWith('.html')) {
+                    let cleanPath = currentPath.replace(/\.html$/, '');
+                    window.history.replaceState({}, document.title, cleanPath);
+                }
+            }
+            
+            // Update ALL links on page to use clean URLs
+            const allLinks = document.querySelectorAll('a[href]');
+            allLinks.forEach(link => {
+                let href = link.getAttribute('href');
+                
+                // Convert .html links to clean URLs
+                if (href.includes('.html') && !href.startsWith('http')) {
+                    let cleanHref = href.replace(/\.html$/, '');
+                    link.setAttribute('href', cleanHref);
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
