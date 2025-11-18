@@ -30,6 +30,10 @@
             text-align: center;
             overflow-x: hidden;
             position: relative;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
 
         /* Space Background with Stars */
@@ -98,6 +102,11 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            pointer-events: none;
         }
 
         .nav-menu {
@@ -169,7 +178,7 @@
             box-shadow: 0 0 30px rgba(100, 100, 255, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
-            order: 1; /* Default order for desktop */
+            order: 1;
         }
 
         .error-image-container {
@@ -177,14 +186,43 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            order: 2; /* Default order for desktop */
+            order: 2;
+            position: relative;
         }
 
-        .error-image {
+        /* Protected Image Container */
+        .protected-image {
+            position: relative;
+            display: inline-block;
+        }
+
+        .character-image {
             max-width: 100%;
             height: auto;
             border-radius: 15px;
             filter: drop-shadow(0 0 20px rgba(100, 100, 255, 0.3));
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            pointer-events: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Protection Overlay */
+        .protection-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: 10;
+            cursor: not-allowed;
         }
 
         .error-title {
@@ -248,7 +286,6 @@
             flex-wrap: wrap;
         }
 
-        /* Consistent button style for ALL buttons */
         .link-button {
             display: inline-block;
             padding: 12px 24px;
@@ -266,7 +303,6 @@
             transform: translateY(-2px);
         }
 
-        /* Home button now matches the link-button style */
         .home-button {
             display: inline-block;
             padding: 12px 24px;
@@ -346,13 +382,12 @@
                 gap: 30px;
             }
 
-            /* MOBILE ORDER: Character FIRST, then error box */
             .error-image-container {
-                order: 1; /* Character comes first */
+                order: 1;
             }
 
             .error-text {
-                order: 2; /* Error box comes after character */
+                order: 2;
                 text-align: center;
                 padding: 30px 20px;
             }
@@ -481,8 +516,14 @@
         </div>
         
         <div class="error-image-container">
-            <img src="https://media.discordapp.net/attachments/1437029156507353188/1440054433252900986/1763406043189.png?ex=691cc2b3&is=691b7133&hm=40d7e78dffe0ec65e9f4e75d94a6acf98ea680760ab243cb88b1ecb5d7ac06a8&=&format=webp&quality=lossless&width=930&height=930" 
-                 alt="404 Error" class="error-image">
+            <!-- Protected Character Image -->
+            <div class="protected-image">
+                <img src="https://media.discordapp.net/attachments/1437029156507353188/1440054433252900986/1763406043189.png?ex=691cc2b3&is=691b7133&hm=40d7e78dffe0ec65e9f4e75d94a6acf98ea680760ab243cb88b1ecb5d7ac06a8&=&format=webp&quality=lossless&width=930&height=930" 
+                     alt="404 Error" class="character-image">
+                <div class="protection-overlay" 
+                     oncontextmenu="return false" 
+                     ondragstart="return false"></div>
+            </div>
         </div>
     </div>
 
@@ -520,6 +561,36 @@
             }
         }
 
+        // Image Protection
+        function protectImages() {
+            // Disable right-click context menu
+            document.addEventListener('contextmenu', function(e) {
+                if (e.target.classList.contains('character-image') || 
+                    e.target.classList.contains('protection-overlay')) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+
+            // Disable drag and drop
+            document.addEventListener('dragstart', function(e) {
+                if (e.target.classList.contains('character-image') || 
+                    e.target.classList.contains('protection-overlay')) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+
+            // Disable keyboard shortcuts for saving
+            document.addEventListener('keydown', function(e) {
+                // Disable Ctrl+S, Ctrl+Shift+S, etc.
+                if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S')) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             // Handle redirects first
             if (handleCustomRoutes()) {
@@ -527,6 +598,7 @@
             }
             
             updateErrorPath();
+            protectImages(); // Enable image protection
             
             const hamburger = document.getElementById('hamburgerBtn');
             const navMenu = document.querySelector('.nav-menu');
