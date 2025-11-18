@@ -302,15 +302,19 @@
 
         .iframe-container {
             width: 100%;
+            height: 600px;
             display: flex;
             justify-content: center;
+            position: relative;
         }
 
         .discord-iframe {
             border: none;
             border-radius: 8px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-            max-width: 100%;
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
         }
 
         .widget-info {
@@ -451,8 +455,8 @@
                 font-size: 1.5em;
             }
             
-            .discord-iframe {
-                height: 400px;
+            .iframe-container {
+                height: 500px;
             }
         }
 
@@ -491,8 +495,8 @@
                 font-size: 1.3em;
             }
             
-            .discord-iframe {
-                height: 350px;
+            .iframe-container {
+                height: 400px;
             }
         }
     </style>
@@ -571,14 +575,13 @@
         <p>Chat with our community directly on our Discord server:</p>
         
         <div class="widget-container">
-            <!-- WidgetBot Iframe Embed -->
+            <!-- WidgetBot Iframe Embed - RESPONSIVE -->
             <div class="iframe-container">
                 <iframe 
                     src="https://e.widgetbot.io/channels/1369933976713695302/1369963263474798662" 
                     class="discord-iframe"
                     allow="clipboard-write; fullscreen" 
-                    height="600" 
-                    width="800">
+                    title="Discord chat embed">
                 </iframe>
             </div>
             
