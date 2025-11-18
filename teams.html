@@ -78,6 +78,100 @@
             }
         }
 
+        /* ---------- ANIMATED GRADIENT BACKGROUNDS ---------- */
+        @keyframes gradientShift {
+            0% {
+                background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+            }
+            25% {
+                background: linear-gradient(45deg, #4ecdc4, #45b7d1, #96ceb4);
+            }
+            50% {
+                background: linear-gradient(45deg, #45b7d1, #96ceb4, #feca57);
+            }
+            75% {
+                background: linear-gradient(45deg, #96ceb4, #feca57, #ff9ff3);
+            }
+            100% {
+                background: linear-gradient(45deg, #feca57, #ff9ff3, #ff6b6b);
+            }
+        }
+
+        @keyframes gradientShift2 {
+            0% {
+                background: linear-gradient(45deg, #a166ab, #5073b8, #1098ad);
+            }
+            25% {
+                background: linear-gradient(45deg, #5073b8, #1098ad, #07b39b);
+            }
+            50% {
+                background: linear-gradient(45deg, #1098ad, #07b39b, #6fba82);
+            }
+            75% {
+                background: linear-gradient(45deg, #07b39b, #6fba82, #a166ab);
+            }
+            100% {
+                background: linear-gradient(45deg, #6fba82, #a166ab, #5073b8);
+            }
+        }
+
+        @keyframes gradientShift3 {
+            0% {
+                background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fad0c4);
+            }
+            25% {
+                background: linear-gradient(45deg, #fad0c4, #a1c4fd, #c2e9fb);
+            }
+            50% {
+                background: linear-gradient(45deg, #a1c4fd, #c2e9fb, #ffecd2);
+            }
+            75% {
+                background: linear-gradient(45deg, #c2e9fb, #ffecd2, #fcb69f);
+            }
+            100% {
+                background: linear-gradient(45deg, #ffecd2, #fcb69f, #ff9a9e);
+            }
+        }
+
+        @keyframes gradientShift4 {
+            0% {
+                background: linear-gradient(45deg, #667eea, #764ba2, #f093fb);
+            }
+            25% {
+                background: linear-gradient(45deg, #764ba2, #f093fb, #f5576c);
+            }
+            50% {
+                background: linear-gradient(45deg, #f093fb, #f5576c, #4facfe);
+            }
+            75% {
+                background: linear-gradient(45deg, #f5576c, #4facfe, #00f2fe);
+            }
+            100% {
+                background: linear-gradient(45deg, #4facfe, #00f2fe, #667eea);
+            }
+        }
+
+        /* Different animated gradients for each section */
+        .gradient-1 {
+            animation: gradientShift 8s ease infinite;
+            background-size: 400% 400%;
+        }
+
+        .gradient-2 {
+            animation: gradientShift2 10s ease infinite;
+            background-size: 400% 400%;
+        }
+
+        .gradient-3 {
+            animation: gradientShift3 12s ease infinite;
+            background-size: 400% 400%;
+        }
+
+        .gradient-4 {
+            animation: gradientShift4 9s ease infinite;
+            background-size: 400% 400%;
+        }
+
         /* ---------- Responsive Navigation Bar ---------- */
         .navbar {
             position: fixed;
@@ -233,6 +327,7 @@
             margin-bottom: 50px;
         }
 
+        /* DIFFERENT COLORS FOR EACH SECTION TITLE */
         .section-title {
             font-size: 2.2em;
             margin-bottom: 10px;
@@ -240,29 +335,39 @@
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
             position: relative;
             display: inline-block;
-            padding-bottom: 10px;
+            padding: 10px 30px;
+            border-radius: 50px;
+            margin-bottom: 30px;
         }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #fff, transparent);
+        .founder-title {
+            background: linear-gradient(45deg, #FF6B6B, #FFA500);
         }
 
+        .owners-title {
+            background: linear-gradient(45deg, #4ECDC4, #44A08D);
+        }
+
+        .directors-title {
+            background: linear-gradient(45deg, #A166AB, #5073B8);
+        }
+
+        .operations-title {
+            background: linear-gradient(45deg, #FFD93D, #FF9CBF);
+        }
+
+        /* HORIZONTAL LAYOUT FOR TEAM GRID */
         .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
             margin-top: 30px;
+            flex-wrap: wrap;
         }
 
+        /* ANIMATED GRADIENT CARDS */
         .team-member {
-            background: rgba(0, 0, 0, 0.55);
+            background: rgba(0, 0, 0, 0.7); /* Darker background for better contrast */
             border-radius: 15px;
             padding: 20px;
             box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
@@ -272,7 +377,32 @@
             align-items: center;
             position: relative;
             overflow: hidden;
+            width: 280px;
+            border: 2px solid transparent;
         }
+
+        .team-member::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            z-index: -1;
+            border-radius: 17px;
+            animation: gradientShift 8s ease infinite;
+            background-size: 400% 400%;
+        }
+
+        /* Different gradient animations for each card */
+        .team-member:nth-child(1)::before { animation: gradientShift 8s ease infinite; }
+        .team-member:nth-child(2)::before { animation: gradientShift2 10s ease infinite; }
+        .team-member:nth-child(3)::before { animation: gradientShift3 12s ease infinite; }
+        .team-member:nth-child(4)::before { animation: gradientShift4 9s ease infinite; }
+        .team-member:nth-child(5)::before { animation: gradientShift 11s ease infinite; }
+        .team-member:nth-child(6)::before { animation: gradientShift2 7s ease infinite; }
+        .team-member:nth-child(7)::before { animation: gradientShift3 13s ease infinite; }
+        .team-member:nth-child(8)::before { animation: gradientShift4 8s ease infinite; }
 
         .team-member:hover {
             transform: translateY(-10px);
@@ -473,11 +603,15 @@
             
             .section-title {
                 font-size: 1.8em;
+                padding: 8px 20px;
             }
             
             .team-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
                 gap: 20px;
+            }
+            
+            .team-member {
+                width: 250px;
             }
         }
 
@@ -506,10 +640,17 @@
             
             .section-title {
                 font-size: 1.6em;
+                padding: 6px 15px;
             }
             
             .team-grid {
-                grid-template-columns: 1fr;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .team-member {
+                width: 100%;
+                max-width: 300px;
             }
             
             .member-avatar {
@@ -580,7 +721,7 @@
     <div class="team-container">
         <!-- Founder Section -->
         <div class="team-section">
-            <h2 class="section-title">Founder</h2>
+            <h2 class="section-title founder-title">Founder</h2>
             <div class="team-grid">
                 <!-- JISU -->
                 <div class="team-member">
@@ -610,7 +751,7 @@
 
         <!-- Owners Section -->
         <div class="team-section">
-            <h2 class="section-title">Owners</h2>
+            <h2 class="section-title owners-title">Owners</h2>
             <div class="team-grid">
                 <!-- Punisher -->
                 <div class="team-member">
@@ -700,7 +841,7 @@
 
         <!-- Directors Section -->
         <div class="team-section">
-            <h2 class="section-title">Directors</h2>
+            <h2 class="section-title directors-title">Directors</h2>
             <div class="team-grid">
                 <!-- KingCobra -->
                 <div class="team-member">
@@ -772,7 +913,7 @@
 
         <!-- Head of Operations Section -->
         <div class="team-section">
-            <h2 class="section-title">Head of Operations</h2>
+            <h2 class="section-title operations-title">Head of Operations</h2>
             <div class="team-grid">
                 <!-- N ? 4 P E X ! ! -->
                 <div class="team-member">
