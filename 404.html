@@ -61,38 +61,6 @@
             50% { opacity: 0.8; }
         }
 
-        /* Snowflake Container */
-        #snow-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        .snowflake {
-            position: absolute;
-            top: -10px;
-            color: white;
-            font-size: 1em;
-            user-select: none;
-            pointer-events: none;
-            opacity: 0.8;
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-        }
-
-        @keyframes fall {
-            0% {
-                transform: translateY(-10px) translateX(0) rotate(0deg);
-            }
-            100% {
-                transform: translateY(100vh) translateX(20px) rotate(360deg);
-            }
-        }
-
         /* Navigation */
         .navbar {
             position: fixed;
@@ -201,6 +169,7 @@
             box-shadow: 0 0 30px rgba(100, 100, 255, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
+            order: 1; /* Default order for desktop */
         }
 
         .error-image-container {
@@ -208,6 +177,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            order: 2; /* Default order for desktop */
         }
 
         .error-image {
@@ -278,47 +248,41 @@
             flex-wrap: wrap;
         }
 
+        /* Consistent button style for ALL buttons */
         .link-button {
             display: inline-block;
             padding: 12px 24px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: rgba(255, 255, 255, 0.1);
             color: #fff;
             text-decoration: none;
             border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             transition: all 0.3s ease;
             font-weight: 500;
         }
 
         .link-button:hover {
-            background: linear-gradient(135deg, #764ba2, #667eea);
+            background: rgba(255, 255, 255, 0.2);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
 
-        .support-button {
-            background: linear-gradient(135deg, #ff9cbf, #9fc1ff) !important;
-            color: #1a1a4a !important;
-            font-weight: bold;
-        }
-
+        /* Home button now matches the link-button style */
         .home-button {
             display: inline-block;
-            padding: 14px 35px;
-            background: linear-gradient(135deg, #9fc1ff, #ff9cbf);
-            color: #1c1c1c;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
             text-decoration: none;
-            border-radius: 25px;
-            font-weight: bold;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            margin-top: 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
             transition: all 0.3s ease;
-            font-size: 1.1em;
+            font-weight: 500;
+            margin-top: 20px;
         }
 
         .home-button:hover {
+            background: rgba(255, 255, 255, 0.2);
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(159, 193, 255, 0.4);
         }
 
         footer {
@@ -382,7 +346,13 @@
                 gap: 30px;
             }
 
+            /* MOBILE ORDER: Character FIRST, then error box */
+            .error-image-container {
+                order: 1; /* Character comes first */
+            }
+
             .error-text {
+                order: 2; /* Error box comes after character */
                 text-align: center;
                 padding: 30px 20px;
             }
@@ -437,7 +407,7 @@
                 align-items: center;
             }
 
-            .link-button {
+            .link-button, .home-button {
                 width: 200px;
                 text-align: center;
             }
@@ -445,9 +415,6 @@
     </style>
 </head>
 <body>
-
-    <!-- Snow Container -->
-    <div id="snow-container"></div>
 
     <!-- Navigation Bar -->
     <nav class="navbar">
@@ -504,7 +471,7 @@
             <div class="help-links">
                 <p>Oh, you need something to read? These might help you:</p>
                 <div class="link-buttons">
-                    <a href="/ngc_bot_server/status" class="link-button support-button">Support</a>
+                    <a href="/ngc_bot_server/support" class="link-button">Support</a>
                     <a href="/ngc_bot_server/trial" class="link-button">Start free trial</a>
                     <a href="https://discord.gg/teEHVSY586" class="link-button" target="_blank">@Discord</a>
                 </div>
@@ -524,29 +491,25 @@
     </footer>
 
     <script>
-        function createSnowfall() {
-            const snowContainer = document.getElementById('snow-container');
-            const snowflakes = ['❄', '⭐', '✨', '•', '·'];
-            const numSnowflakes = 60;
+        // Handle custom routes in 404 page
+        function handleCustomRoutes() {
+            const path = window.location.pathname;
+            const cleanPath = path.replace(/\/$/, '').replace(/\.html$/, '');
             
-            for (let i = 0; i < numSnowflakes; i++) {
-                const snowflake = document.createElement('div');
-                snowflake.className = 'snowflake';
-                snowflake.textContent = snowflakes[Math.floor(Math.random() * snowflakes.length)];
-                
-                const size = Math.random() * 1.5 + 0.5;
-                const startPosition = Math.random() * 100;
-                const animationDuration = Math.random() * 8 + 5;
-                const opacity = Math.random() * 0.7 + 0.3;
-                const delay = Math.random() * 5;
-                
-                snowflake.style.left = `${startPosition}vw`;
-                snowflake.style.fontSize = `${size}em`;
-                snowflake.style.opacity = opacity;
-                snowflake.style.animation = `fall ${animationDuration}s linear ${delay}s infinite`;
-                
-                snowContainer.appendChild(snowflake);
+            switch(cleanPath) {
+                case '/ngc_bot_server/discord':
+                    window.location.href = 'https://discord.gg/teEHVSY586';
+                    return true;
+                    
+                case '/ngc_bot_server/staff-apply':
+                    window.location.href = '/ngc_bot_server/staff-apply';
+                    return true;
+                    
+                case '/ngc_bot_server/ban-appeal':
+                    window.location.href = '/ngc_bot_server/ban-appeal';
+                    return true;
             }
+            return false;
         }
 
         function updateErrorPath() {
@@ -558,7 +521,11 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            createSnowfall();
+            // Handle redirects first
+            if (handleCustomRoutes()) {
+                return; // Stop if redirecting
+            }
+            
             updateErrorPath();
             
             const hamburger = document.getElementById('hamburgerBtn');
