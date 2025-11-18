@@ -499,7 +499,7 @@
             </p>
             
             <div class="error-message-box">
-                <span class="error-path" id="errorPath">The URL /thewrongdestinationpath was not located on this server.</span>
+                <span class="error-path" id="errorPath">The URL was not located on this server.</span>
                 <span class="error-note">This is the full extent of the information we can provide.</span>
             </div>
             
@@ -557,7 +557,21 @@
             const errorPathElement = document.getElementById('errorPath');
             if (errorPathElement) {
                 const currentPath = window.location.pathname;
-                errorPathElement.textContent = `The URL ${currentPath} was not located on this server.`;
+                
+                // Remove the base path to show only the "wrong" part
+                const basePath = '/ngc_bot_server/';
+                let wrongPath = currentPath;
+                
+                // If the path starts with the base path, extract only the wrong part
+                if (currentPath.startsWith(basePath)) {
+                    wrongPath = currentPath.substring(basePath.length);
+                    // If it's empty after removing base path, show the full path
+                    if (wrongPath === '') {
+                        wrongPath = currentPath;
+                    }
+                }
+                
+                errorPathElement.textContent = `The URL /${wrongPath} was not located on this server.`;
             }
         }
 
